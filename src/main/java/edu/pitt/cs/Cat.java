@@ -1,7 +1,6 @@
 package edu.pitt.cs;
 
 import org.mockito.Mockito;
-import static org.mockito.Mockito.*; 
 
 public interface Cat {
 	public static Cat createInstance(InstanceType type, int id, String name) {
@@ -13,8 +12,14 @@ public interface Cat {
 			case SOLUTION:
 				return new CatSolution(id, name);
 			case MOCK:
-			    // TODO: Return a mock object that emulates the behavior of a real object.
-				return null;
+			    // TODO: Return a mock object that emulates the behavior of the real object, if you feel you need one.
+
+				Cat cat = Mockito.mock(Cat.class);
+
+				Mockito.when(cat.getId()).thenReturn(1);
+				Mockito.when(cat.getName()).thenReturn("Jennyanydots");
+				Mockito.when(cat.toString()).thenReturn("ID 1. Jennyanydots");
+				return cat;
 			default:
 				assert(false);
 				return null;
